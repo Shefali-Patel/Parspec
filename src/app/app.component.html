@@ -1,0 +1,29 @@
+<div class="eaton mat-typography" fxFlexFill cdkScrollable>
+<mat-toolbar class="search-block mat-elevation-z4 active" >
+		<mat-toolbar-row style="padding: 0 5px;">
+      <mat-icon class="search-icon">search</mat-icon>
+			<!-- <button class="search-icon" mat-icon-button disabled>
+        <mat-icon>search</mat-icon>
+      </button> -->
+      <input class="search-control" type="text" placeholder="Search users by ID, address, name" [(ngModel)]="searchText" #searchbar>
+      <!-- <button mat-button mat-icon-button (click)="searchClose()">
+        
+      </button>  -->
+      <mat-icon (click)="searchText =''">close</mat-icon>
+  </mat-toolbar-row>
+  </mat-toolbar>
+<div *ngIf="searchText.length >0" class="dropdown">
+  <mat-list class="matList">
+    <mat-list-item *ngFor="let item of list | filterPipe: searchText">
+    <!-- <mat-icon mat-list-avatar style="width:auto">person</mat-icon> -->
+    <div mat-line class="itemId id">{{item.id}}</div>
+    <div mat-line class="itemId name">{{item.name}}</div>
+    <div mat-line class="itemId item">"{{item.items}}" found in items</div>
+    <div mat-line class="itemId address">{{item.address}}</div>
+    </mat-list-item>
+    <mat-list-item class="noUser" *ngIf="(list | filterPipe: searchText).length === 0">
+      <div mat-line >No User Found</div>
+    </mat-list-item>
+  </mat-list>
+</div>
+</div>
